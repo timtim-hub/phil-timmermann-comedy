@@ -75,13 +75,8 @@ export const shows: Show[] = [
 
 // CURATED selection of best Instagram images only
 export const instagramImages = {
-  // Hero background slideshow (landscape-friendly, high impact)
-  hero: [
-    "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg", // Dating 2. Klasse - on stage
-    "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg", // Frankfurt - performance
-    "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg", // Kölsch - stage
-    "/media/instagram/2022-06-01_17-21-02_CeRVXA6qMI1.jpg", // Portrait - street style
-  ],
+  // Hero - Use single portrait image with proper positioning
+  hero: "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg",
   
   // About section (portrait focused)
   about: {
