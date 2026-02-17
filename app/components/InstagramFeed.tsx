@@ -1,11 +1,78 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Instagram, Lock, ExternalLink, Heart, MessageCircle } from "lucide-react";
+import { Instagram, Lock, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCookieConsent } from "../context/CookieConsentContext";
-import { instagramPosts } from "@/lib/data";
 import { staggerContainer, fadeInUp } from "@/lib/motion";
+
+// REAL Instagram images from @phil.timmermann (most recent)
+const instagramPosts = [
+  {
+    id: "1",
+    src: "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg",
+    caption: "Dating 2. Klasse",
+    likes: 156,
+    comments: 14,
+    shortcode: "DUQ5aXLjbPt",
+  },
+  {
+    id: "2",
+    src: "/media/instagram/2026-01-22_16-45-10_DT0epe3DG3x.jpg",
+    caption: "New Content",
+    likes: 89,
+    comments: 5,
+    shortcode: "DT0epe3DG3x",
+  },
+  {
+    id: "3",
+    src: "/media/instagram/2026-01-09_16-34-56_DTS_kxeDIZn.jpg",
+    caption: "Show Update",
+    likes: 124,
+    comments: 8,
+    shortcode: "DTS_kxeDIZn",
+  },
+  {
+    id: "4",
+    src: "/media/instagram/2025-12-28_18-47-50_DS0VH-QDczC.jpg",
+    caption: "Comedy Night",
+    likes: 203,
+    comments: 12,
+    shortcode: "DS0VH-QDczC",
+  },
+  {
+    id: "5",
+    src: "/media/instagram/2025-12-22_16-53-38_DSkrY5VjXtp.jpg",
+    caption: "Backstage",
+    likes: 178,
+    comments: 9,
+    shortcode: "DSkrY5VjXtp",
+  },
+  {
+    id: "6",
+    src: "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg",
+    caption: "Frankfurt!",
+    likes: 245,
+    comments: 18,
+    shortcode: "DSVRcBNkUFu",
+  },
+  {
+    id: "7",
+    src: "/media/instagram/2025-12-01_17-00-35_DRunT9gjHL9.jpg",
+    caption: "Nightwash Club",
+    likes: 189,
+    comments: 11,
+    shortcode: "DRunT9gjHL9",
+  },
+  {
+    id: "8",
+    src: "/media/instagram/2025-11-15_17-14-10_DRFcNAoDKog.jpg",
+    caption: "Comedy Show",
+    likes: 167,
+    comments: 7,
+    shortcode: "DRFcNAoDKog",
+  },
+];
 
 export function InstagramFeed() {
   const { instagramConsent, setShowBanner } = useCookieConsent();
@@ -106,10 +173,11 @@ export function InstagramFeed() {
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-zinc-400">
             Behind the scenes, Work-in-Progress Gags und Einblicke in das Comedian-Leben.
+            Alles aus der echten Instagram Galerie.
           </p>
         </motion.div>
 
-        {/* Instagram Grid */}
+        {/* Instagram Grid - REAL IMAGES */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -128,61 +196,22 @@ export function InstagramFeed() {
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Placeholder gradient representing Instagram content */}
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 transition-transform duration-500 group-hover:scale-110"
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${
-                    index % 3 === 0
-                      ? "#1a1a2e, #16213e"
-                      : index % 3 === 1
-                      ? "#2d1b69, #1a1a2e"
-                      : "#0f0f23, #1a1a3e"
-                  })`,
-                }}
+              {/* Real Instagram Image */}
+              <img
+                src={post.src}
+                alt={post.caption}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-
-              {/* Content overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                {post.type === "reel" ? (
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="mb-3 h-12 w-12 rounded-full border-2 border-pink-500/50 border-t-pink-500"
-                  />
-                ) : (
-                  <div className="mb-3 rounded-xl bg-zinc-800/80 p-3 backdrop-blur-sm">
-                    <Instagram className="h-6 w-6 text-pink-400" />
-                  </div>
-                )}
-                <p className="line-clamp-3 text-xs text-zinc-400">{post.caption}</p>
-              </div>
 
               {/* Hover overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-                <div className="flex items-center gap-6 text-white">
-                  <div className="flex items-center gap-2">
-                    <Heart className="h-5 w-5 fill-pink-500 text-pink-500" />
-                    <span className="font-semibold">{post.likes}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5" />
-                    <span className="font-semibold">{post.comments}</span>
+                <div className="text-center text-white p-4">
+                  <p className="font-semibold mb-2">{post.caption}</p>
+                  <div className="flex items-center justify-center gap-4 text-sm">
+                    <span>❤️ {post.likes}</span>
+                    <span>💬 {post.comments}</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Type badge */}
-              <div className="absolute right-2 top-2 rounded-full bg-black/50 p-1.5 backdrop-blur-sm">
-                {post.type === "reel" ? (
-                  <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-                  </svg>
-                ) : (
-                  <svg className="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-                  </svg>
-                )}
               </div>
             </motion.a>
           ))}

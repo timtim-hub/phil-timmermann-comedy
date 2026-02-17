@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { shows } from "@/lib/data";
 import { staggerContainer, fadeInUp, slideInFromLeft, slideInFromRight } from "@/lib/motion";
 
+// REAL Instagram images mapped to shows
 const showImages: Record<string, string> = {
-  "1": "/media/shows/trier.jpg",
-  "2": "/media/shows/lingen.jpg",
-  "3": "/media/shows/gelsenkirchen.jpg",
-  "4": "/media/shows/munich.jpg",
-  "5": "/media/shows/cologne.jpg",
+  "1": "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg", // Trier/Comedy
+  "2": "/media/instagram/2025-09-22_16-04-17_DO6RNCzDJ_h.jpg", // Lingen
+  "3": "/media/instagram/2025-08-25_16-19-02_DNyMqfnWKeM.jpg", // Gelsenkirchen
+  "4": "/media/instagram/2025-10-01_16-27-51_DPRfJoFjFLT.jpg", // Munich
+  "5": "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg", // Cologne/Kölsch
 };
 
 function formatDate(dateStr: string) {
@@ -33,7 +34,7 @@ function formatDate(dateStr: string) {
 function ShowCard({ show, index }: { show: typeof shows[0]; index: number }) {
   const date = formatDate(show.date);
   const isEven = index % 2 === 0;
-  const imageUrl = showImages[show.id] || "/media/hero/spotlight.jpg";
+  const imageUrl = showImages[show.id] || "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg";
 
   return (
     <motion.div
@@ -44,7 +45,7 @@ function ShowCard({ show, index }: { show: typeof shows[0]; index: number }) {
       className="group relative"
     >
       <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/50 hover:bg-zinc-800/50 hover:shadow-[0_0_60px_-15px_rgba(139,92,246,0.3)]">
-        {/* Background Image */}
+        {/* Background Image - REAL INSTAGRAM */}
         <div className="absolute inset-0">
           <img
             src={imageUrl}
@@ -157,15 +158,15 @@ export function Shows() {
       <motion.div style={{ y: backgroundY }} className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-zinc-950 to-zinc-950" />
         
-        {/* Floating images in background */}
+        {/* Floating REAL Instagram images in background */}
         <div className="absolute inset-0 opacity-10">
           <img
-            src="/media/hero/spotlight.jpg"
+            src="/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg"
             alt=""
             className="absolute top-0 right-0 w-1/2 h-1/2 object-cover"
           />
           <img
-            src="/media/hero/stage-lights.jpg"
+            src="/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg"
             alt=""
             className="absolute bottom-0 left-0 w-1/3 h-1/3 object-cover"
           />

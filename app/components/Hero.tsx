@@ -7,13 +7,22 @@ import { Button } from "@/components/ui/button";
 import { bio, socialLinks } from "@/lib/data";
 import { heroTextStagger, textReveal } from "@/lib/motion";
 
+// REAL Instagram images from @phil.timmermann
 const heroImages = [
-  "/media/hero/spotlight.jpg",
-  "/media/hero/stage-lights.jpg",
-  "/media/hero/comedy-stage-1.jpg",
-  "/media/hero/concert.jpg",
-  "/media/hero/audience.jpg",
-  "/media/hero/event.jpg",
+  "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg",
+  "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg",
+  "/media/instagram/2023-10-02_17-01-20_Cx52F00qfe4.jpg",
+  "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg",
+  "/media/instagram/2022-06-01_17-21-02_CeRVXA6qMI1.jpg",
+  "/media/instagram/2023-11-26_01-25-27_UTC_profile_pic.jpg",
+];
+
+// Floating gallery thumbnails - ALL REAL Instagram images
+const floatingImages = [
+  "/media/instagram/2025-12-01_17-00-35_DRunT9gjHL9.jpg",
+  "/media/instagram/2025-11-15_17-14-10_DRFcNAoDKog.jpg",
+  "/media/instagram/2025-10-31_16-57-01_DQeySFaDETR.jpg",
+  "/media/instagram/2025-10-23_16-06-45_DQKGFi5DCUZ.jpg",
 ];
 
 export function Hero() {
@@ -45,7 +54,7 @@ export function Hero() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950"
     >
-      {/* Background Image Slideshow */}
+      {/* Background Image Slideshow - REAL INSTAGRAM IMAGES */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -61,8 +70,8 @@ export function Hero() {
               style={{ backgroundImage: `url(${heroImages[currentImage]})` }}
             />
             {/* Dark overlay with gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-zinc-950/50 to-zinc-950" />
-            <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-transparent to-zinc-950/80" />
+            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/60 to-zinc-950" />
+            <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-transparent to-zinc-950/90" />
           </motion.div>
         </AnimatePresence>
 
@@ -105,35 +114,35 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Floating Image Thumbnails */}
+      {/* Floating Image Thumbnails - ALL REAL INSTAGRAM CONTENT */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
           animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-[20%] left-[5%] w-32 h-44 rounded-lg overflow-hidden border-2 border-white/10 shadow-2xl opacity-60"
         >
-          <img src="/media/gallery/gallery-1.jpg" alt="" className="w-full h-full object-cover" />
+          <img src={floatingImages[0]} alt="" className="w-full h-full object-cover" />
         </motion.div>
         <motion.div
           animate={{ y: [0, 20, 0], rotate: [0, -3, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           className="absolute top-[60%] left-[8%] w-28 h-36 rounded-lg overflow-hidden border-2 border-white/10 shadow-2xl opacity-50"
         >
-          <img src="/media/gallery/gallery-2.jpg" alt="" className="w-full h-full object-cover" />
+          <img src={floatingImages[1]} alt="" className="w-full h-full object-cover" />
         </motion.div>
         <motion.div
           animate={{ y: [0, -15, 0], rotate: [0, 3, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           className="absolute top-[15%] right-[5%] w-36 h-48 rounded-lg overflow-hidden border-2 border-white/10 shadow-2xl opacity-60"
         >
-          <img src="/media/gallery/gallery-3.jpg" alt="" className="w-full h-full object-cover" />
+          <img src={floatingImages[2]} alt="" className="w-full h-full object-cover" />
         </motion.div>
         <motion.div
           animate={{ y: [0, 25, 0], rotate: [0, -2, 0] }}
           transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           className="absolute top-[55%] right-[8%] w-32 h-40 rounded-lg overflow-hidden border-2 border-white/10 shadow-2xl opacity-50"
         >
-          <img src="/media/gallery/gallery-4.jpg" alt="" className="w-full h-full object-cover" />
+          <img src={floatingImages[3]} alt="" className="w-full h-full object-cover" />
         </motion.div>
       </div>
 

@@ -2,9 +2,16 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Quote, Mic2, Users, Sparkles, Dumbbell } from "lucide-react";
+import { Quote, Users, Sparkles, Dumbbell } from "lucide-react";
 import { bio } from "@/lib/data";
 import { staggerContainer, fadeInUp } from "@/lib/motion";
+
+// REAL Instagram images
+const aboutImages = {
+  main: "/media/instagram/2022-06-01_17-21-02_CeRVXA6qMI1.jpg",
+  secondary1: "/media/instagram/2025-12-01_17-00-35_DRunT9gjHL9.jpg",
+  secondary2: "/media/instagram/2025-10-21_16-13-57_DQE9d6-jJ-j.jpg",
+};
 
 export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,7 +47,7 @@ export function About() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
-          {/* Image Side - Enhanced with multiple images */}
+          {/* Image Side - REAL INSTAGRAM IMAGES */}
           <motion.div style={{ y: imageY }} className="relative">
             {/* Decorative elements behind image */}
             <motion.div
@@ -66,7 +73,7 @@ export function About() {
               className="absolute -right-4 -bottom-4 h-24 w-24 rounded-full border border-dashed border-fuchsia-500/30"
             />
 
-            {/* Main image container */}
+            {/* Main image container - REAL INSTAGRAM */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -75,7 +82,7 @@ export function About() {
               className="relative aspect-[4/5] overflow-hidden rounded-3xl"
             >
               <img
-                src="/media/about/portrait.jpg"
+                src={aboutImages.main}
                 alt="Phil Timmermann"
                 className="h-full w-full object-cover"
               />
@@ -93,7 +100,7 @@ export function About() {
               />
             </motion.div>
 
-            {/* Floating secondary images */}
+            {/* Floating secondary images - REAL INSTAGRAM */}
             <motion.div
               initial={{ opacity: 0, x: -50, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -102,8 +109,8 @@ export function About() {
               className="absolute -left-12 top-1/4 w-28 h-36 rounded-xl overflow-hidden border-4 border-zinc-950 shadow-2xl"
             >
               <img
-                src="/media/about/fitness.jpg"
-                alt="Fitness"
+                src={aboutImages.secondary1}
+                alt="Phil auf der Bühne"
                 className="w-full h-full object-cover"
               />
             </motion.div>
@@ -116,8 +123,8 @@ export function About() {
               className="absolute -right-8 bottom-1/4 w-32 h-40 rounded-xl overflow-hidden border-4 border-zinc-950 shadow-2xl"
             >
               <img
-                src="/media/about/backstage.jpg"
-                alt="Backstage"
+                src={aboutImages.secondary2}
+                alt="Phil Backstage"
                 className="w-full h-full object-cover"
               />
             </motion.div>
