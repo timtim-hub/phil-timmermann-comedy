@@ -1,4 +1,4 @@
-// Phil Timmermann - All Shows and Data
+// Phil Timmermann - Curated Instagram Images & Data
 
 export interface Show {
   id: string;
@@ -32,7 +32,7 @@ export const shows: Show[] = [
   },
   {
     id: "2",
-    date: "2025-02-20",
+    date: "2026-02-20",
     time: "20:00",
     title: "Comedy Ride Open Mic",
     venue: "Comedy Ride",
@@ -42,7 +42,7 @@ export const shows: Show[] = [
   },
   {
     id: "3",
-    date: "2025-02-21",
+    date: "2026-02-21",
     time: "20:00",
     title: "Comedyflash",
     venue: "Comedyflash",
@@ -73,56 +73,55 @@ export const shows: Show[] = [
   },
 ];
 
-export const instagramPosts = [
-  {
-    id: "1",
-    shortcode: "DSVRcBNkUFu",
-    caption: "Frankfurt! 🎤 #frankfurt #witzig #comedy #crowdworkgott",
-    likes: 156,
-    comments: 14,
-    type: "reel",
+// CURATED selection of best Instagram images only
+export const instagramImages = {
+  // Hero background slideshow (landscape-friendly, high impact)
+  hero: [
+    "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg", // Dating 2. Klasse - on stage
+    "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg", // Frankfurt - performance
+    "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg", // Kölsch - stage
+    "/media/instagram/2022-06-01_17-21-02_CeRVXA6qMI1.jpg", // Portrait - street style
+  ],
+  
+  // About section (portrait focused)
+  about: {
+    main: "/media/instagram/2022-06-01_17-21-02_CeRVXA6qMI1.jpg", // Street portrait
+    secondary: "/media/instagram/2025-12-01_17-00-35_DRunT9gjHL9.jpg", // On stage
   },
-  {
-    id: "2",
-    shortcode: "Cx52F00qfe4",
-    caption: "Alle arrogant? 😂 #comedy #comedyclub #punchline",
-    likes: 245,
-    comments: 8,
-    type: "reel",
+  
+  // Gallery grid (curated selection of 8 best)
+  gallery: [
+    { src: "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg", title: "Dating 2. Klasse", category: "Reel" },
+    { src: "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg", title: "Frankfurt Show", category: "Performance" },
+    { src: "/media/instagram/2023-10-02_17-01-20_Cx52F00qfe4.jpg", title: "Alle Arrogant?", category: "Crowd Work" },
+    { src: "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg", title: "Mein wahrer Name", category: "Köln" },
+    { src: "/media/instagram/2025-11-15_17-14-10_DRFcNAoDKog.jpg", title: "Comedy Show", category: "Stage" },
+    { src: "/media/instagram/2025-10-31_16-57-01_DQeySFaDETR.jpg", title: "Live Performance", category: "Event" },
+    { src: "/media/instagram/2022-11-08_17-13-25_CktTrUwqHLG.jpg", title: "Portrait", category: "Personal" },
+    { src: "/media/instagram/2025-12-28_18-47-50_DS0VH-QDczC.jpg", title: "Showtime", category: "Performance" },
+  ],
+  
+  // Show cards background
+  shows: {
+    "1": "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg",
+    "2": "/media/instagram/2025-09-22_16-04-17_DO6RNCzDJ_h.jpg",
+    "3": "/media/instagram/2025-08-25_16-19-02_DNyMqfnWKeM.jpg",
+    "4": "/media/instagram/2025-10-01_16-27-51_DPRfJoFjFLT.jpg",
+    "5": "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg",
   },
-  {
-    id: "3",
-    shortcode: "CvKwpSwqJcx",
-    caption: "Mein wahrer Name… 🤫 #comedy #fun #spaß",
-    likes: 187,
-    comments: 6,
-    type: "reel",
-  },
-  {
-    id: "4",
-    shortcode: "DCSMyBeNIdF",
-    caption: "Lingener Radioactive Slam ☢️ 46ste Runde!",
-    likes: 89,
-    comments: 3,
-    type: "post",
-  },
-  {
-    id: "5",
-    shortcode: "DRepF0nCPPx",
-    caption: "Catch me @nightwash_club 🎤❤️ Jeden Donnerstag!",
-    likes: 203,
-    comments: 12,
-    type: "post",
-  },
-  {
-    id: "6",
-    shortcode: "DEcASqFM4lh",
-    caption: "Neues Jahr, neue Shows! Jeden 2. + 4. Mittwoch",
-    likes: 41,
-    comments: 2,
-    type: "reel",
-  },
-];
+  
+  // Instagram feed section (8 recent posts)
+  feed: [
+    { src: "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg", caption: "Dating 2. Klasse", shortcode: "DUQ5aXLjbPt" },
+    { src: "/media/instagram/2026-01-22_16-45-10_DT0epe3DG3x.jpg", caption: "New Content", shortcode: "DT0epe3DG3x" },
+    { src: "/media/instagram/2026-01-09_16-34-56_DTS_kxeDIZn.jpg", caption: "Show Update", shortcode: "DTS_kxeDIZn" },
+    { src: "/media/instagram/2025-12-28_18-47-50_DS0VH-QDczC.jpg", caption: "Comedy Night", shortcode: "DS0VH-QDczC" },
+    { src: "/media/instagram/2025-12-22_16-53-38_DSkrY5VjXtp.jpg", caption: "Backstage", shortcode: "DSkrY5VjXtp" },
+    { src: "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg", caption: "Frankfurt!", shortcode: "DSVRcBNkUFu" },
+    { src: "/media/instagram/2025-12-01_17-00-35_DRunT9gjHL9.jpg", caption: "Nightwash Club", shortcode: "DRunT9gjHL9" },
+    { src: "/media/instagram/2025-11-15_17-14-10_DRFcNAoDKog.jpg", caption: "Comedy Show", shortcode: "DRFcNAoDKog" },
+  ],
+};
 
 export const bio = {
   headline: "Your local Comedian",

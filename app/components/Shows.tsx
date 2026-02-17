@@ -2,19 +2,10 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Calendar, Clock, MapPin, Ticket, ArrowRight, Star } from "lucide-react";
+import { Calendar, Clock, MapPin, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { shows } from "@/lib/data";
-import { staggerContainer, fadeInUp, slideInFromLeft, slideInFromRight } from "@/lib/motion";
-
-// REAL Instagram images mapped to shows
-const showImages: Record<string, string> = {
-  "1": "/media/instagram/2025-12-16_17-18-58_DSVRcBNkUFu.jpg", // Trier/Comedy
-  "2": "/media/instagram/2025-09-22_16-04-17_DO6RNCzDJ_h.jpg", // Lingen
-  "3": "/media/instagram/2025-08-25_16-19-02_DNyMqfnWKeM.jpg", // Gelsenkirchen
-  "4": "/media/instagram/2025-10-01_16-27-51_DPRfJoFjFLT.jpg", // Munich
-  "5": "/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg", // Cologne/Kölsch
-};
+import { shows, instagramImages } from "@/lib/data";
+import { staggerContainer, slideInFromLeft, slideInFromRight } from "@/lib/motion";
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr);
@@ -22,62 +13,54 @@ function formatDate(dateStr: string) {
     day: date.getDate().toString().padStart(2, "0"),
     month: date.toLocaleDateString("de-DE", { month: "short" }),
     weekday: date.toLocaleDateString("de-DE", { weekday: "short" }),
-    full: date.toLocaleDateString("de-DE", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }),
   };
 }
 
 function ShowCard({ show, index }: { show: typeof shows[0]; index: number }) {
   const date = formatDate(show.date);
   const isEven = index % 2 === 0;
-  const imageUrl = showImages[show.id] || "/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg";
+  const imageUrl = instagramImages.shows[show.id as keyof typeof instagramImages.shows] || instagramImages.hero[0];
 
   return (
     <motion.div
       variants={isEven ? slideInFromLeft : slideInFromRight}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-50px" }}
       className="group relative"
     >
-      <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm transition-all duration-500 hover:border-violet-500/50 hover:bg-zinc-800/50 hover:shadow-[0_0_60px_-15px_rgba(139,92,246,0.3)]">
-        {/* Background Image - REAL INSTAGRAM */}
+      <div className="relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 transition-all duration-300 hover:border-violet-500/50">
+        {/* Background Image */}
         <div className="absolute inset-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageUrl}
             alt={show.city}
-            className="h-full w-full object-cover opacity-20 transition-opacity duration-500 group-hover:opacity-30"
+            className="h-full w-full object-cover opacity-15 transition-opacity duration-300 group-hover:opacity-25"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/95 to-zinc-900/90" />
         </div>
 
-        <div className="relative p-6 md:p-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="relative p-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             {/* Date Block */}
-            <div className="flex items-center gap-6">
-              <div className="flex h-20 w-20 flex-col items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white shadow-lg">
+            <div className="flex items-center gap-4">
+              <div className="flex h-16 w-16 flex-col items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white shadow-lg shrink-0">
                 <span className="text-xs font-bold uppercase tracking-wider opacity-80">
                   {date.month}
                 </span>
-                <span className="text-3xl font-black">{date.day}</span>
-                <span className="text-xs opacity-80">{date.weekday}</span>
+                <span className="text-2xl font-black">{date.day}</span>
               </div>
 
               <div>
-                <h3 className="mb-1 text-xl font-bold text-white md:text-2xl">
+                <h3 className="text-lg font-bold text-white">
                   {show.title}
                 </h3>
-                <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400">
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    {show.time}
-                  </span>
+                <div className="flex items-center gap-2 text-sm text-zinc-400 mt-1">
+                  <Clock className="h-3.5 w-3.5" />
+                  {show.time}
                   {show.recurring && (
-                    <span className="rounded-full bg-violet-500/20 px-2 py-0.5 text-xs font-medium text-violet-300">
+                    <span className="rounded-full bg-violet-500/20 px-2 py-0.5 text-xs font-medium text-violet-300 ml-2">
                       {show.recurring}
                     </span>
                   )}
@@ -87,52 +70,33 @@ function ShowCard({ show, index }: { show: typeof shows[0]; index: number }) {
 
             {/* Venue Info */}
             <div className="flex-1 md:text-center">
-              <p className="flex items-center gap-2 text-zinc-300 md:justify-center">
-                <MapPin className="h-4 w-4 text-violet-400" />
+              <p className="flex items-center gap-1.5 text-zinc-300 md:justify-center text-sm">
+                <MapPin className="h-3.5 w-3.5 text-violet-400" />
                 {show.venue}
               </p>
-              <p className="text-sm text-zinc-500">{show.city}</p>
-              {show.address && (
-                <p className="text-xs text-zinc-600">{show.address}</p>
-              )}
+              <p className="text-xs text-zinc-500">{show.city}</p>
             </div>
 
             {/* Price & CTA */}
-            <div className="flex flex-col items-start gap-3 md:items-end">
+            <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className={`text-lg font-bold ${show.isFree ? "text-green-400" : "text-white"}`}>
-                  {show.isFree && <Star className="inline-block h-4 w-4 mr-1" />}
+                <p className={`text-base font-bold ${show.isFree ? "text-green-400" : "text-white"}`}>
+                  {show.isFree && <Star className="inline-block h-3.5 w-3.5 mr-1" />}
                   {show.price}
                 </p>
-                {show.priceNote && (
-                  <p className="text-xs text-zinc-500">{show.priceNote}</p>
-                )}
               </div>
 
               <Button
                 size="sm"
-                className="group/btn relative overflow-hidden rounded-full bg-white text-black hover:bg-zinc-200"
+                className="rounded-full bg-white text-black hover:bg-zinc-200 text-sm px-4"
               >
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="flex items-center gap-1">
                   {show.isFree ? "Reservieren" : "Tickets"}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </Button>
             </div>
           </div>
-
-          {/* Description if available */}
-          {show.description && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              whileHover={{ height: "auto", opacity: 1 }}
-              className="overflow-hidden"
-            >
-              <p className="mt-4 border-t border-zinc-800 pt-4 text-sm text-zinc-400">
-                {show.description}
-              </p>
-            </motion.div>
-          )}
         </div>
       </div>
     </motion.div>
@@ -146,57 +110,35 @@ export function Shows() {
     offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
     <section
       id="shows"
       ref={containerRef}
-      className="relative py-32 overflow-hidden bg-zinc-950"
+      className="relative py-24 overflow-hidden bg-zinc-950"
     >
-      {/* Background */}
       <motion.div style={{ y: backgroundY }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-zinc-950 to-zinc-950" />
-        
-        {/* Floating REAL Instagram images in background */}
-        <div className="absolute inset-0 opacity-10">
-          <img
-            src="/media/instagram/2026-02-02_17-34-16_DUQ5aXLjbPt.jpg"
-            alt=""
-            className="absolute top-0 right-0 w-1/2 h-1/2 object-cover"
-          />
-          <img
-            src="/media/instagram/2023-07-26_17-02-35_CvKwpSwqJcx.jpg"
-            alt=""
-            className="absolute bottom-0 left-0 w-1/3 h-1/3 object-cover"
-          />
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/15 via-zinc-950 to-zinc-950" />
       </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="mb-4 inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-sm font-medium text-violet-300"
-          >
+          <span className="mb-3 inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-sm font-medium text-violet-300">
             Save the Date
-          </motion.span>
-          <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-5xl lg:text-6xl">
+          </span>
+          <h2 className="mb-3 text-3xl font-black tracking-tight text-white md:text-4xl lg:text-5xl">
             Tour<span className="text-violet-500">.</span>Termine
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-zinc-400">
+          <p className="mx-auto max-w-xl text-base text-zinc-400">
             Phil live erleben — von kostenlosen Open Mics bis zu exklusiven Shows.
-            Hier findest du alle aktuellen Termine.
           </p>
         </motion.div>
 
@@ -205,32 +147,32 @@ export function Shows() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="space-y-6"
+          viewport={{ once: true, margin: "-50px" }}
+          className="space-y-4"
         >
           {shows.map((show, index) => (
             <ShowCard key={show.id} show={show} index={index} />
           ))}
         </motion.div>
 
-        {/* Newsletter CTA */}
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-20 text-center"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-12 text-center"
         >
-          <div className="inline-flex flex-col items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-8 backdrop-blur-sm">
-            <Calendar className="h-8 w-8 text-violet-400" />
-            <h3 className="text-xl font-bold text-white">
+          <div className="inline-flex flex-col items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900/30 p-6">
+            <Calendar className="h-6 w-6 text-violet-400" />
+            <h3 className="text-lg font-bold text-white">
               Keinen Termin verpassen!
             </h3>
-            <p className="max-w-md text-zinc-400">
-              Folge Phil auf Instagram für alle Updates und neuen Show-Ankündigungen.
+            <p className="text-sm text-zinc-400">
+              Folge Phil auf Instagram für alle Updates.
             </p>
             <Button
-              className="rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 text-white hover:shadow-lg"
+              className="rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 px-5 text-sm text-white"
               asChild
             >
               <a
