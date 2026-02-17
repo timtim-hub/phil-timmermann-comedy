@@ -2,9 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Quote, Mic2, Users, Sparkles } from "lucide-react";
+import { Quote, Mic2, Users, Sparkles, Dumbbell } from "lucide-react";
 import { bio } from "@/lib/data";
-import { staggerContainer, fadeInUp, maskReveal } from "@/lib/motion";
+import { staggerContainer, fadeInUp } from "@/lib/motion";
 
 export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export function About() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
-          {/* Image Side */}
+          {/* Image Side - Enhanced with multiple images */}
           <motion.div style={{ y: imageY }} className="relative">
             {/* Decorative elements behind image */}
             <motion.div
@@ -74,32 +74,14 @@ export function About() {
               transition={{ duration: 0.8 }}
               className="relative aspect-[4/5] overflow-hidden rounded-3xl"
             >
-              {/* Gradient placeholder for Phil's photo */}
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-zinc-900 to-fuchsia-900/40" />
+              <img
+                src="/media/about/portrait.jpg"
+                alt="Phil Timmermann"
+                className="h-full w-full object-cover"
+              />
               
-              {/* Overlay pattern */}
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDIiLz4KPC9zdmc+')] opacity-50" />
-
-              {/* Content placeholder */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3, type: "spring" }}
-                    className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500"
-                  >
-                    <Mic2 className="h-16 w-16 text-white" />
-                  </motion.div>
-                  <p className="text-zinc-400 text-sm uppercase tracking-widest">
-                    Phil Timmermann
-                  </p>
-                  <p className="text-zinc-500 text-xs mt-2">
-                    Comedian aus Düsseldorf
-                  </p>
-                </div>
-              </div>
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent" />
 
               {/* Animated border */}
               <motion.div
@@ -107,14 +89,36 @@ export function About() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
-                className="absolute inset-0 rounded-3xl border-2 border-gradient-to-br from-violet-500/50 to-fuchsia-500/50"
-                style={{
-                  background: "linear-gradient(135deg, rgba(139,92,246,0.3), rgba(236,72,153,0.3))",
-                  padding: "2px",
-                  WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMaskComposite: "xor",
-                  maskComposite: "exclude",
-                }}
+                className="absolute inset-0 rounded-3xl ring-2 ring-violet-500/30 ring-offset-4 ring-offset-zinc-950"
+              />
+            </motion.div>
+
+            {/* Floating secondary images */}
+            <motion.div
+              initial={{ opacity: 0, x: -50, y: 20 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="absolute -left-12 top-1/4 w-28 h-36 rounded-xl overflow-hidden border-4 border-zinc-950 shadow-2xl"
+            >
+              <img
+                src="/media/about/fitness.jpg"
+                alt="Fitness"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50, y: -20 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="absolute -right-8 bottom-1/4 w-32 h-40 rounded-xl overflow-hidden border-4 border-zinc-950 shadow-2xl"
+            >
+              <img
+                src="/media/about/backstage.jpg"
+                alt="Backstage"
+                className="w-full h-full object-cover"
               />
             </motion.div>
 
@@ -124,7 +128,7 @@ export function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="absolute -left-6 top-1/4 rounded-xl border border-zinc-800 bg-zinc-900/90 p-4 backdrop-blur-sm shadow-xl"
+              className="absolute -left-6 top-1/2 rounded-xl border border-zinc-800 bg-zinc-900/90 p-4 backdrop-blur-sm shadow-xl"
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/20">
@@ -142,7 +146,7 @@ export function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
-              className="absolute -right-6 bottom-1/4 rounded-xl border border-zinc-800 bg-zinc-900/90 p-4 backdrop-blur-sm shadow-xl"
+              className="absolute -right-6 top-1/3 rounded-xl border border-zinc-800 bg-zinc-900/90 p-4 backdrop-blur-sm shadow-xl"
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-fuchsia-500/20">
@@ -151,6 +155,24 @@ export function About() {
                 <div>
                   <p className="text-xl font-bold text-white">100+</p>
                   <p className="text-xs text-zinc-500">Shows</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+              className="absolute right-8 -bottom-6 rounded-xl border border-zinc-800 bg-zinc-900/90 p-4 backdrop-blur-sm shadow-xl"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20">
+                  <Dumbbell className="h-5 w-5 text-orange-400" />
+                </div>
+                <div>
+                  <p className="text-xl font-bold text-white">Muscles</p>
+                  <p className="text-xs text-zinc-500">& Witze</p>
                 </div>
               </div>
             </motion.div>

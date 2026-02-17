@@ -5,6 +5,7 @@ import { Navigation } from "./components/Navigation";
 import { Hero } from "./components/Hero";
 import { Shows } from "./components/Shows";
 import { About } from "./components/About";
+import { MediaGallery } from "./components/MediaGallery";
 import { InstagramFeed } from "./components/InstagramFeed";
 import { Footer } from "./components/Footer";
 import { CookieBanner } from "./components/CookieBanner";
@@ -16,6 +17,7 @@ export default function Home() {
         <Navigation />
         <Hero />
         <Shows />
+        <MediaGallery />
         <About />
         <InstagramFeed />
         <Footer />
